@@ -6,14 +6,9 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.navOptions
+import com.nexu.feature.todohome.navigation.addTodoScreen
+import com.nexu.feature.todohome.navigation.todoHomeScreen
 
-/**
- * Top-level navigation graph. Navigation is organized as explained at
- * https://d.android.ai/jetpack/compose/nav-adaptive
- *
- * The navigation graph defined in this file defines the different top level routes. Navigation
- * within each route is handled using state and Back Handlers.
- */
 @Composable
 fun NexuNavHost(
     navController: NavHostController,
@@ -27,7 +22,8 @@ fun NexuNavHost(
         modifier = modifier
     ) {
 
-        //homeScreen()
+        todoHomeScreen()
+        addTodoScreen()
     }
 }
 

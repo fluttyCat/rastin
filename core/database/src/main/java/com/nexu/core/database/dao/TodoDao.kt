@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.nexu.core.database.model.TodoResourceEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TodoDao {
@@ -19,6 +20,6 @@ interface TodoDao {
     suspend fun updateIsDone(id: Int, isDone: Boolean)
 
     @Query("SELECT * FROM todos ORDER BY id DESC")
-    fun getAllTodos(): List<TodoResourceEntity>
+    fun getAllTodos(): Flow<List<TodoResourceEntity>>
 
 }

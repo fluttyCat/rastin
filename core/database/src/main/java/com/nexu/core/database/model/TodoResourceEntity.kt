@@ -7,14 +7,23 @@ import com.nexu.android.core.data.model.TodoResource
 @Entity(tableName = "todos")
 data class TodoResourceEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val title: String,
-    val description: String,
-    val isDone: Boolean = false
+    val title: String? = null,
+    val description: String? = null,
+    val isDone: Boolean? = false
 )
 
-fun TodoResourceEntity.asExternalModel() = TodoResource(
+fun TodoResourceEntity.toResource() = TodoResource(
     id = id,
     title = title,
     description = description,
     isDone = isDone,
 )
+
+fun TodoResource.toEntity(): TodoResourceEntity {
+    return TodoResourceEntity(
+        id = this.id,
+        title = this.title,
+        description = this.description,
+        isDone = this.isDone
+    )
+}

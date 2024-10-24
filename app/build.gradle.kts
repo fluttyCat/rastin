@@ -68,6 +68,7 @@ dependencies {
     implementation(project(":core:data"))
     implementation(project(":core:domain"))
     implementation(project(":core:database"))
+    implementation(project(":feature:todohome"))
 
     androidTestImplementation(libs.androidx.navigation.testing)
     debugImplementation(libs.androidx.compose.ui.testManifest)
