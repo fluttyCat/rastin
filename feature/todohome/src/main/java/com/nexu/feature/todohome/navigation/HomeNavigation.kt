@@ -4,6 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
+import com.nexu.feature.todohome.AddTodoScreen
 import com.nexu.feature.todohome.TodoHomeScreen
 
 
@@ -16,11 +17,11 @@ fun NavController.navigateToTodoHome(
     this.navigate(todoHomeRoute, navOptions)
 }
 
-fun NavGraphBuilder.todoHomeScreen() {
+fun NavGraphBuilder.todoHomeScreen(navigateToAddTodo: () -> Unit) {
     composable(
         route = todoHomeRoute,
     ) {
-        TodoHomeScreen()
+        TodoHomeScreen(navigateToAddTodo = navigateToAddTodo)
     }
 }
 
@@ -30,10 +31,12 @@ fun NavController.navigateToAddTodo(
     this.navigate(addTodoRoute, navOptions)
 }
 
-fun NavGraphBuilder.addTodoScreen() {
+fun NavGraphBuilder.addTodoScreen(navigateBack: () -> Unit) {
     composable(
         route = addTodoRoute,
     ) {
-        TodoHomeScreen()
+        AddTodoScreen(
+            onNavigateBack = navigateBack,
+            onAddTodo = { title, description, isCompleted -> }) { }
     }
 }

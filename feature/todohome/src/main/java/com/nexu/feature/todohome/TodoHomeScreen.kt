@@ -3,6 +3,7 @@ package com.nexu.feature.todohome
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,8 +14,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -39,6 +44,7 @@ import kotlinx.coroutines.flow.onEach
 @Composable
 fun TodoHomeScreen(
     viewModel: TodoHomeViewModel = hiltViewModel(),
+    navigateToAddTodo: () -> Unit
 ) {
     val onEventSent = viewModel::handleEvents
     val context = LocalContext.current
@@ -56,28 +62,28 @@ fun TodoHomeScreen(
     }
 
     val todoList by viewModel.todosListResponse.collectAsStateWithLifecycle()
-    val addTodo by viewModel.addTodoResponse.collectAsStateWithLifecycle()
+
     val updateTodo by viewModel.updateTodoResponse.collectAsStateWithLifecycle()
 
     Column {
-        TodoHomeScreenContent(todoList = todoList, onEventSent = onEventSent)
+        TodoHomeScreenContent(todoList = todoList, onEventSent = onEventSent) {
+            navigateToAddTodo()
+        }
     }
 
 }
 
 @Composable
 fun TodoHomeScreenContent(
-    todoList: UiState, onEventSent: (event: TodoHomeContract.Event) -> Unit
+    todoList: UiState,
+    onEventSent: (event: TodoHomeContract.Event) -> Unit,
+    onFabClick: () -> Unit
 ) {
+    Box(modifier = Modifier.fillMaxSize()) {
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-    ) {
         when (todoList) {
             is UiState.Failure -> {
-                //toast
+                // Handle failure, e.g., show a Toast or Snackbar
             }
 
             UiState.Loading -> {
@@ -86,13 +92,30 @@ fun TodoHomeScreenContent(
 
             is UiState.Success -> {
                 LazyColumn {
-                    items(todoList.getAllTodos?.size ?: 0) {
-                        todoList.getAllTodos?.get(it)
-                            ?.let { it1 -> TodoListItem(todoItem = it1, {}, {}) }
+                    items(todoList.getAllTodos?.size ?: 0) { index ->
+                        todoList.getAllTodos?.get(index)
+                            ?.let { todoItem ->
+                                TodoListItem(
+                                    todoItem = todoItem,
+                                    onTodoCheckedChange = {},
+                                    onTodoClick = {})
+                            }
                     }
                 }
             }
         }
+
+
+
+        FloatingActionButton(
+            onClick = { onFabClick() },
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(16.dp),
+            content = {
+                Icon(imageVector = Icons.Default.Add, contentDescription = "Add Todo")
+            }
+        )
     }
 }
 
@@ -139,10 +162,10 @@ fun TodoListItem(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun TodoHomeScreenContentPreview() {
-    TodoHomeScreenContent(todoList = UiState.Loading, onEventSent = {})
+    TodoHomeScreenContent(todoList = UiState.Loading, onEventSent = {}) {}
     //TodoListItem(TodoResource(), {}, {})
 }
 

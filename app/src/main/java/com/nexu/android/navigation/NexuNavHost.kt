@@ -7,6 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.navOptions
 import com.nexu.feature.todohome.navigation.addTodoScreen
+import com.nexu.feature.todohome.navigation.navigateToAddTodo
 import com.nexu.feature.todohome.navigation.todoHomeScreen
 
 @Composable
@@ -22,8 +23,8 @@ fun NexuNavHost(
         modifier = modifier
     ) {
 
-        todoHomeScreen()
-        addTodoScreen()
+        todoHomeScreen(navController::navigateToAddTodo)
+        addTodoScreen(navigateBack = { navController.popBackStack() })
     }
 }
 
