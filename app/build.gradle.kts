@@ -3,6 +3,7 @@ plugins {
     id("nexu.android.application.compose")
     id("nexu.android.hilt")
     id("jacoco")
+    id ("com.google.devtools.ksp")
 }
 
 android {
@@ -66,6 +67,7 @@ dependencies {
     implementation(project(":core:model"))
     implementation(project(":core:data"))
     implementation(project(":core:domain"))
+    implementation(project(":core:database"))
 
     androidTestImplementation(libs.androidx.navigation.testing)
     debugImplementation(libs.androidx.compose.ui.testManifest)

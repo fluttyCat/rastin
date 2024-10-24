@@ -38,3 +38,4 @@ include(":core:data")
 include(":core:domain")
 
 include(":feature:todohome")
+include(":core:database")
