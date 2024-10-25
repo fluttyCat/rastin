@@ -2,6 +2,7 @@ package com.nexu.feature.todohome
 
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,11 +10,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Checkbox
@@ -62,11 +62,20 @@ fun TodoHomeScreen(
     }
 
     val todoList by viewModel.todosListResponse.collectAsStateWithLifecycle()
-
     val updateTodo by viewModel.updateTodoResponse.collectAsStateWithLifecycle()
 
+    LaunchedEffect(updateTodo) {
+        if (updateTodo is UiState.Success) {
+            viewModel.handleEvents(TodoHomeContract.Event.LoadAllTodos)
+        }
+    }
+
     Column {
-        TodoHomeScreenContent(todoList = todoList, onEventSent = onEventSent) {
+        TodoHomeScreenContent(
+            todoList = todoList,
+            updateTodo = updateTodo,
+            onEventSent = onEventSent
+        ) {
             navigateToAddTodo()
         }
     }
@@ -76,10 +85,15 @@ fun TodoHomeScreen(
 @Composable
 fun TodoHomeScreenContent(
     todoList: UiState,
+    updateTodo: UiState,
     onEventSent: (event: TodoHomeContract.Event) -> Unit,
     onFabClick: () -> Unit
 ) {
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(4.dp)
+    ) {
 
         when (todoList) {
             is UiState.Failure -> {
@@ -87,21 +101,39 @@ fun TodoHomeScreenContent(
             }
 
             UiState.Loading -> {
+                Text("Loading...")
                 NexuLoading(modifier = Modifier.fillMaxSize())
             }
 
             is UiState.Success -> {
-                LazyColumn {
-                    items(todoList.getAllTodos?.size ?: 0) { index ->
-                        todoList.getAllTodos?.get(index)
-                            ?.let { todoItem ->
-                                TodoListItem(
-                                    todoItem = todoItem,
-                                    onTodoCheckedChange = {},
-                                    onTodoClick = {})
-                            }
+                if (todoList.getAllTodos?.isNotEmpty() == true) {
+                    LazyColumn {
+                        items(todoList.getAllTodos.size) { index ->
+                            todoList.getAllTodos.get(index)
+                                ?.let { todoItem ->
+                                    TodoListItem(
+                                        todoItem = todoItem,
+                                        onTodoCheckedChange = { updatedTodo ->
+                                            onEventSent(
+                                                TodoHomeContract.Event.UpdateTodo(
+                                                    updatedTodo
+                                                )
+                                            )
+                                        },
+                                        onTodoClick = {})
+                                    Spacer(modifier = Modifier.height(4.dp))
+                                }
+                        }
+                    }
+                } else {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text("There is no todo")
                     }
                 }
+
             }
         }
 
@@ -126,21 +158,21 @@ fun TodoListItem(
     onTodoCheckedChange: (TodoResource) -> Unit,
     onTodoClick: (TodoResource) -> Unit
 ) {
-    var isChecked by remember { mutableStateOf(false) }
+    var isChecked by remember { mutableStateOf(todoItem.isDone) } // Set initial state based on todoItem
 
     Row(modifier = Modifier
         .fillMaxWidth()
+        .border(1.dp, MaterialTheme.colorScheme.primary)
         .clickable { onTodoClick(todoItem) }
         .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically) {
 
-        Checkbox(checked = isChecked, onCheckedChange = {
+        Checkbox(checked = isChecked!!, onCheckedChange = {
             isChecked = it
             onTodoCheckedChange(todoItem.copy(isDone = isChecked))
         })
 
         Spacer(modifier = Modifier.width(8.dp))
-
 
         Column(
             modifier = Modifier.weight(1f)
@@ -148,13 +180,13 @@ fun TodoListItem(
             Text(
                 text = todoItem.title ?: "",
                 style = MaterialTheme.typography.titleMedium,
-                color = if (isChecked) MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f) else MaterialTheme.colorScheme.onSurface
+                color = if (isChecked!!) MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f) else MaterialTheme.colorScheme.onSurface
             )
 
             Text(
                 text = todoItem.description ?: "",
                 style = MaterialTheme.typography.bodyMedium,
-                color = if (isChecked) MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f) else MaterialTheme.colorScheme.onSurface
+                color = if (isChecked!!) MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f) else MaterialTheme.colorScheme.onSurface
             )
         }
 
@@ -165,7 +197,7 @@ fun TodoListItem(
 @Preview(showBackground = true)
 @Composable
 fun TodoHomeScreenContentPreview() {
-    TodoHomeScreenContent(todoList = UiState.Loading, onEventSent = {}) {}
+    //TodoHomeScreenContent(todoList = UiState.Loading, onEventSent = {}) {}
     //TodoListItem(TodoResource(), {}, {})
 }
 
