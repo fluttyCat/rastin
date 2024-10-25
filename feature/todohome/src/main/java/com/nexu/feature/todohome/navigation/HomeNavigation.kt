@@ -1,5 +1,6 @@
 package com.nexu.feature.todohome.navigation
 
+import androidx.compose.material3.SnackbarHostState
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -31,11 +32,12 @@ fun NavController.navigateToAddTodo(
     this.navigate(addTodoRoute, navOptions)
 }
 
-fun NavGraphBuilder.addTodoScreen(navigateBack: () -> Unit) {
+fun NavGraphBuilder.addTodoScreen(snackbarHostState : SnackbarHostState, navigateBack: () -> Unit) {
     composable(
         route = addTodoRoute,
     ) {
         AddTodoScreen(
+            snackbarHostState = snackbarHostState,
             onNavigateBack = navigateBack,
             onAddTodo = { title, description, isCompleted -> }) { }
     }

@@ -1,5 +1,6 @@
 package com.nexu.android.navigation
 
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
@@ -13,9 +14,10 @@ import com.nexu.feature.todohome.navigation.todoHomeScreen
 @Composable
 fun NexuNavHost(
     navController: NavHostController,
-    onBackClick: () -> Unit,
+    snackbarHostState: SnackbarHostState,
     modifier: Modifier = Modifier,
     startDestination: String,
+    onBackClick: () -> Unit,
 ) {
     NavHost(
         navController = navController,
@@ -24,7 +26,10 @@ fun NexuNavHost(
     ) {
 
         todoHomeScreen(navController::navigateToAddTodo)
-        addTodoScreen(navigateBack = { navController.popBackStack() })
+        addTodoScreen(
+            navigateBack = { navController.popBackStack() },
+            snackbarHostState = snackbarHostState,
+        )
     }
 }
 

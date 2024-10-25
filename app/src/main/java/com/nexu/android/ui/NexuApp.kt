@@ -12,8 +12,11 @@ import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -46,12 +49,15 @@ private fun NexuAppContent(
     appState: NexuAppState,
     startDestination: String,
 ) {
+    val snackbarHostState = remember { SnackbarHostState() }
+
     Scaffold(
         modifier = Modifier.semantics { testTagsAsResourceId = true },
         containerColor = Color.Transparent,
         contentColor = MaterialTheme.colorScheme.onBackground,
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         bottomBar = {},
+        snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {}
     ) { padding ->
         Row(
@@ -67,6 +73,7 @@ private fun NexuAppContent(
             NexuNavHost(
                 navController = appState.navController,
                 onBackClick = appState::onBackClick,
+                snackbarHostState = snackbarHostState,
                 startDestination = startDestination,
                 modifier = Modifier
                     .padding(padding)

@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -24,10 +26,12 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nexu.android.core.data.model.TodoResource
+import com.nexu.android.core.ui.NexuLoading
 
 @Composable
 fun AddTodoScreen(
     viewModel: TodoHomeViewModel = hiltViewModel(),
+    snackbarHostState: SnackbarHostState,
     onAddTodo: (String, String, Boolean) -> Unit,
     onNavigateBack: () -> Unit,
     refreshHomeScreen: () -> Unit
@@ -36,19 +40,23 @@ fun AddTodoScreen(
     val context = LocalContext.current
     val addTodo by viewModel.addTodoResponse.collectAsStateWithLifecycle()
 
-    LaunchedEffect(addTodo) {
+    LaunchedEffect(addTodo, snackbarHostState) {
         when (addTodo) {
             is TodoHomeContract.UiState.Success -> {
                 refreshHomeScreen()
+                snackbarHostState.showSnackbar(
+                    "Todo added successfully!",
+                    duration = SnackbarDuration.Short
+                )
                 onNavigateBack()
             }
 
             is TodoHomeContract.UiState.Failure -> {
-                // Handle error, show a message
+                snackbarHostState.showSnackbar("Failed to add Todo.")
             }
 
             is TodoHomeContract.UiState.Loading -> {
-                // Optionally, you can show a loading indicator here
+
             }
         }
     }
@@ -73,7 +81,6 @@ fun AddTodoScreenContent(
     var title by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
     var isCompleted by remember { mutableStateOf(false) }
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -98,18 +105,6 @@ fun AddTodoScreenContent(
         )
 
         Spacer(modifier = Modifier.height(16.dp))
-
-        /*// Checkbox
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Checkbox(
-                checked = isCompleted,
-                onCheckedChange = { isCompleted = it }
-            )
-            Text(text = "Completed")
-        }*/
 
         Spacer(modifier = Modifier.height(32.dp))
 
