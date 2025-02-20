@@ -1,7 +1,7 @@
-package com.nexu.android.core.data.common.network.di
+package com.rastin.android.core.data.common.network.di
 
-import com.nexu.android.core.data.common.network.Dispatcher
-import com.nexu.android.core.data.common.network.NexuDispatchers
+import com.rastin.android.core.data.common.network.Dispatcher
+import com.rastin.android.core.data.common.network.RastinDispatchers
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,6 +13,6 @@ import kotlinx.coroutines.Dispatchers
 @InstallIn(SingletonComponent::class)
 object DispatchersModule {
     @Provides
-    @Dispatcher(NexuDispatchers.IO)
+    @Dispatcher(RastinDispatchers.IO)
     fun providesIODispatcher(): CoroutineDispatcher = Dispatchers.IO
 }

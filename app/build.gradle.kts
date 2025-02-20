@@ -1,7 +1,7 @@
 plugins {
-    id("nexu.android.application")
-    id("nexu.android.application.compose")
-    id("nexu.android.hilt")
+    id("rastin.android.application")
+    id("rastin.android.application.compose")
+    id("rastin.android.hilt")
     id("jacoco")
     id ("com.google.devtools.ksp")
 }
@@ -12,11 +12,11 @@ android {
         buildConfig = true
     }
     defaultConfig {
-        applicationId = "com.nexu.android"
+        applicationId = "com.rastin.android"
         versionCode = 1
         versionName = "1.0.0" // X.Y.Z; X = Major, Y = minor, Z = Patch level
-        setProperty("archivesBaseName", "Nexu-${versionName}")
-        testInstrumentationRunner = ".core.testing.NexuTestRunner"
+        setProperty("archivesBaseName", "Rastin-${versionName}")
+        testInstrumentationRunner = ".core.testing.RastinTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -55,7 +55,7 @@ android {
             isIncludeAndroidResources = true
         }
     }
-    namespace = "com.nexu.android"
+    namespace = "com.rastin.android"
 }
 
 dependencies {
@@ -66,9 +66,7 @@ dependencies {
     implementation(project(":core:common"))
     implementation(project(":core:model"))
     implementation(project(":core:data"))
-    implementation(project(":core:domain"))
-    implementation(project(":core:database"))
-    implementation(project(":feature:todohome"))
+    implementation(project(":feature:home"))
 
     androidTestImplementation(libs.androidx.navigation.testing)
     debugImplementation(libs.androidx.compose.ui.testManifest)
@@ -100,25 +98,5 @@ configurations.configureEach {
     resolutionStrategy {
         force(libs.junit4)
         force("org.objenesis:objenesis:2.6")
-    }
-}
-
-tasks.register<Copy>("publish") {
-    dependsOn("assembleRelease", "bundleRelease")
-
-    val apkSourceDir = "build/outputs/apk/prod/release/"
-    val bundleSourceDir = "build/outputs/bundle/prodRelease/"
-
-    from(apkSourceDir)
-    include("*.apk")
-    into("/Users/amiir/Desktop")
-
-    from(bundleSourceDir)
-    include("*.aab")
-    into("/Users/amiir/Desktop")
-
-    doLast {
-        fileTree(apkSourceDir) { include("*.apk") }.forEach { it.delete() }
-        fileTree(bundleSourceDir) { include("*.aab") }.forEach { it.delete() }
     }
 }

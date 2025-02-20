@@ -1,23 +1,26 @@
-package com.rastin.feature.todohome
+package com.rastin.feature.home
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.rastin.android.core.data.common.network.BinanceWebSocketClient
+import com.rastin.android.core.data.repository.Repository
 import com.rastin.android.core.ui.BaseViewModel
-import com.rastin.feature.todohome.HomeContract.Effect
-import com.rastin.feature.todohome.HomeContract.Event
-import com.rastin.feature.todohome.HomeContract.UiState
+import com.rastin.feature.home.HomeContract.Effect
+import com.rastin.feature.home.HomeContract.Event
+import com.rastin.feature.home.HomeContract.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val webSocketClient: BinanceWebSocketClient
+    private val repository: Repository
 ) : BaseViewModel<Event, UiState, Effect>() {
 
 
@@ -28,27 +31,23 @@ class HomeViewModel @Inject constructor(
 
     }
 
-    private val _depthData = MutableStateFlow<String?>(null)
-    val depthData: StateFlow<String?> = _depthData.asStateFlow()
+    private val _marketDepth = MutableStateFlow<String>("")
+    val marketDepth: StateFlow<String> get() = _marketDepth
 
-    private var job: Job? = null
+    init {
+        viewModelScope.launch {
+            repository.connect()
 
-    fun startWebSocket() {
-        job?.cancel()
-        job = viewModelScope.launch {
-            webSocketClient.connect()
-                .debounce(5000)
-                .collect { data ->
-                    _depthData.value = data
-                }
+            repository.observeMarketDepth().collect { marketData ->
+                _marketDepth.value = marketData
+            }
         }
     }
 
     override fun onCleared() {
         super.onCleared()
-        job?.cancel()
         viewModelScope.launch {
-            webSocketClient.disconnect()
+            repository.disconnect()
         }
     }
 }

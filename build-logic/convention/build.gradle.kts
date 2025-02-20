@@ -2,7 +2,7 @@ plugins {
     `kotlin-dsl`
 }
 
-group = "com.nexu.android.buildlogic"
+group = "com.rastin.android.buildlogic"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -17,31 +17,31 @@ dependencies {
 gradlePlugin {
     plugins {
         register("androidApplicationCompose") {
-            id = "nexu.android.application.compose"
+            id = "rastin.android.application.compose"
             implementationClass = "AndroidApplicationComposeConventionPlugin"
         }
         register("androidApplication") {
-            id = "nexu.android.application"
+            id = "rastin.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
         register("androidLibraryCompose") {
-            id = "nexu.android.library.compose"
+            id = "rastin.android.library.compose"
             implementationClass = "AndroidLibraryComposeConventionPlugin"
         }
         register("androidLibrary") {
-            id = "nexu.android.library"
+            id = "rastin.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
         register("androidFeature") {
-            id = "nexu.android.feature"
+            id = "rastin.android.feature"
             implementationClass = "AndroidFeatureConventionPlugin"
         }
         register("androidHilt") {
-            id = "nexu.android.hilt"
+            id = "rastin.android.hilt"
             implementationClass = "AndroidHiltConventionPlugin"
         }
         register("secrets") {
-            id = "nexu.secrets"
+            id = "rastin.secrets"
             implementationClass = "secret.SecretsPlugin"
         }
     }

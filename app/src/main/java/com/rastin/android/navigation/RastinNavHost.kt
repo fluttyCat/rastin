@@ -1,4 +1,4 @@
-package com.nexu.android.navigation
+package com.rastin.android.navigation
 
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
@@ -7,12 +7,10 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.navOptions
-import com.rastin.feature.todohome.navigation.addTodoScreen
-import com.rastin.feature.todohome.navigation.navigateToAddTodo
-import com.rastin.feature.todohome.navigation.todoHomeScreen
+import com.rastin.feature.home.navigation.homeScreen
 
 @Composable
-fun NexuNavHost(
+fun RastinNavHost(
     navController: NavHostController,
     snackbarHostState: SnackbarHostState,
     modifier: Modifier = Modifier,
@@ -24,12 +22,7 @@ fun NexuNavHost(
         startDestination = startDestination,
         modifier = modifier
     ) {
-
-        todoHomeScreen(navController::navigateToAddTodo)
-        addTodoScreen(
-            navigateBack = { navController.popBackStack() },
-            snackbarHostState = snackbarHostState,
-        )
+        homeScreen(snackbarHostState, onBackClick)
     }
 }
 

@@ -1,4 +1,4 @@
-package com.nexu.android
+package com.rastin.android
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

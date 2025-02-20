@@ -1,4 +1,4 @@
-package com.nexu.android.di
+package com.rastin.android.di
 
 import android.app.Activity
 import android.util.Log
@@ -18,7 +18,7 @@ object JankStatsModule {
             // Make sure to only log janky frames.
             if (frameData.isJank) {
                 // We're currently logging this but would better report it to a backend.
-                Log.v("Nexu Jank", frameData.toString())
+                Log.v("Rastin Jank", frameData.toString())
             }
         }
     }

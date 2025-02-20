@@ -1,4 +1,4 @@
-package com.rastin.feature.todohome
+package com.rastin.feature.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -24,16 +23,14 @@ fun HomeScreen(
     val onEventSent = viewModel::handleEvents
     val context = LocalContext.current
 
+    HomeScreenContent(viewModel)
 }
 
 @Composable
 fun HomeScreenContent(viewModel: HomeViewModel) {
-    val depthData by viewModel.depthData.collectAsState()
+    val depthData by viewModel.marketDepth.collectAsState()
 
-    LaunchedEffect(Unit) {
-        viewModel.startWebSocket()
-    }
-
+    Text(text = depthData)
     Column(
         modifier = Modifier.fillMaxSize().padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,

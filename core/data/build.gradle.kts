@@ -1,18 +1,18 @@
 plugins {
-    id("nexu.android.library")
-    id("nexu.android.hilt")
+    id("rastin.android.library")
+    id("rastin.android.hilt")
     id("kotlinx-serialization")
 }
 
 android {
-    namespace = "com.nexu.android.core.data"
+    namespace = "com.rastin.android.core.data"
 }
 
 dependencies {
     implementation(project(":core:common"))
     implementation(project(":core:model"))
-    implementation(project(":core:database"))
 
+    implementation(libs.okhttp.logging)
     implementation(libs.androidx.documentfile)
     implementation(libs.androidx.core.ktx)
     implementation(libs.kotlinx.datetime)

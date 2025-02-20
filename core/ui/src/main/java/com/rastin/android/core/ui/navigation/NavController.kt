@@ -1,4 +1,4 @@
-package com.nexu.android.core.ui.navigation
+package com.rastin.android.core.ui.navigation
 
 import android.annotation.SuppressLint
 import android.os.Bundle

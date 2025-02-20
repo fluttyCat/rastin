@@ -2,7 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Allows us to override night specific attributes in the
          values-night folder. -->
-    <style name="NightAdjusted.Theme.Nexu" parent="android:Theme.Material.Light.NoActionBar">
+    <style name="NightAdjusted.Theme.Rastin" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:windowBackground">@color/backgroundColor</item>
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
@@ -10,21 +10,16 @@
 
     <!-- Allows us to override platform level specific attributes in their
          respective values-vXX folder. -->
-    <style name="PlatformAdjusted.Theme.Nexu" parent="NightAdjusted.Theme.Nexu">
+    <style name="PlatformAdjusted.Theme.Rastin" parent="NightAdjusted.Theme.Rastin">
         <item name="android:statusBarColor">@color/black30</item>
     </style>
 
     <!-- The final theme we use -->
-    <style name="Theme.Nexu" parent="PlatformAdjusted.Theme.Nexu" />
+    <style name="Theme.Rastin" parent="PlatformAdjusted.Theme.Rastin" />
 
     <style name="NightAdjusted.Theme.Splash" parent="Theme.SplashScreen">
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
     </style>
 
-    <style name="Theme.Nexu.Splash" parent="NightAdjusted.Theme.Splash">
-        <item name="windowSplashScreenAnimatedIcon">@mipmap/app_icon_round</item>
-        <item name="windowSplashScreenBackground">@color/backgroundColor</item>
-        <item name="postSplashScreenTheme">@style/Theme.Nexu</item>
-    </style>
 </resources>

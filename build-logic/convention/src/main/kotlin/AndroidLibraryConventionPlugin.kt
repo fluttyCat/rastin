@@ -1,8 +1,8 @@
 import com.android.build.api.variant.LibraryAndroidComponentsExtension
 import com.android.build.gradle.LibraryExtension
-import com.nexu.android.configureFlavors
-import com.nexu.android.configureKotlinAndroid
-import com.nexu.android.configurePrintApksTask
+import com.rastin.android.configureFlavors
+import com.rastin.android.configureKotlinAndroid
+import com.rastin.android.configurePrintApksTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension

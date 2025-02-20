@@ -1,11 +1,11 @@
-package com.rastin.feature.todohome.navigation
+package com.rastin.feature.home.navigation
 
 import androidx.compose.material3.SnackbarHostState
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import com.rastin.feature.todohome.HomeScreen
+import com.rastin.feature.home.HomeScreen
 
 
 const val homeRoute = "homeRoute"

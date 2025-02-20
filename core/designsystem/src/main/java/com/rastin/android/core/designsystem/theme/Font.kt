@@ -1,4 +1,4 @@
-package com.nexu.android.core.designsystem.theme
+package com.rastin.android.core.designsystem.theme
 
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily

@@ -1,4 +1,4 @@
-package com.rastin.feature.todohome
+package com.rastin.feature.home
 
 import com.rastin.android.core.ui.ViewEvent
 import com.rastin.android.core.ui.ViewSideEffect

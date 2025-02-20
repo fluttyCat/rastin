@@ -1,4 +1,4 @@
-package com.nexu.android.ui
+package com.rastin.android.ui
 
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
@@ -12,13 +12,13 @@ import androidx.navigation.compose.rememberNavController
 import com.rastin.android.core.ui.TrackDisposableJank
 
 @Composable
-fun rememberNexuAppState(
+fun rememberRastinAppState(
     windowSizeClass: WindowSizeClass,
     navController: NavHostController = rememberNavController(),
-): NexuAppState {
+): RastinAppState {
     NavigationTrackingSideEffect(navController)
     return remember(navController, windowSizeClass) {
-        NexuAppState(
+        RastinAppState(
             navController,
             windowSizeClass,
         )
@@ -26,7 +26,7 @@ fun rememberNexuAppState(
 }
 
 @Stable
-class NexuAppState(
+class RastinAppState(
     val navController: NavHostController,
     private val windowSizeClass: WindowSizeClass,
 ) {

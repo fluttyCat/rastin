@@ -1,11 +1,11 @@
-package com.nexu.android.core.designsystem.theme
+package com.rastin.android.core.designsystem.theme
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
 /**
- * A class to model gradient color values for Nexu.
+ * A class to model gradient color values for rastin.
  */
 @Immutable
 data class GradientColors(

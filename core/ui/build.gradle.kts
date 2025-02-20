@@ -1,17 +1,25 @@
 plugins {
-    id("nexu.android.library")
-    id("nexu.android.library.compose")
+    id("rastin.android.library")
+    id("rastin.android.library.compose")
 }
 
 android {
-    namespace = "com.nexu.android.core.ui"
+    namespace = "com.rastin.android.core.ui"
 }
 
 dependencies {
     implementation(project(":core:designsystem"))
 
     implementation(project(":core:model"))
-    implementation(project(":core:domain"))
+
+
+    implementation("io.ktor:ktor-client-core:2.3.3")
+    implementation("io.ktor:ktor-client-websockets:2.3.3")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    implementation("io.ktor:ktor-client-okhttp:2.3.3")
+    implementation("io.ktor:ktor-client-websockets:2.3.3")
+    implementation("io.ktor:ktor-client-cio:2.3.3")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.coil.kt)

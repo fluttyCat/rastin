@@ -1,4 +1,4 @@
-package com.nexu.android.core.designsystem.theme
+package com.rastin.android.core.designsystem.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
@@ -6,11 +6,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 /**
- * Nexu typography.
+ * rastin typography.
  *
  */
 
-internal val NexuTypography = Typography(
+internal val rastinTypography = Typography(
     displayLarge = TextStyle(
         fontFamily = robotoFonts,
         fontWeight = FontWeight.Normal,

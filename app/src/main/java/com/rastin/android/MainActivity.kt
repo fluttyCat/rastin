@@ -1,4 +1,4 @@
-package com.nexu.android
+package com.rastin.android
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -8,20 +8,11 @@ import androidx.activity.viewModels
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.lifecycle.lifecycleScope
 import androidx.metrics.performance.JankStats
-import com.nexu.android.MainActivityUiState.Loading
-import com.nexu.android.MainActivityUiState.Success
-import com.rastin.android.core.designsystem.theme.NexuTheme
-import com.nexu.android.ui.NexuApp
-import com.rastin.feature.todohome.navigation.todoHomeRoute
+import com.rastin.android.core.designsystem.theme.Theme
+import com.rastin.android.ui.RastinApp
+import com.rastin.feature.home.navigation.homeRoute
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
@@ -39,25 +30,13 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
 
-        var uiState: MainActivityUiState by mutableStateOf(Loading)
-
-        var splashVisible = true
-        lifecycleScope.launch {
-            delay(500L)
-            splashVisible = false
-        }
-
-        splashScreen.setKeepOnScreenCondition {
-            splashVisible
-        }
         enableEdgeToEdge()
 
         setContent {
-            NexuTheme {
-                NexuApp(
+            Theme {
+                RastinApp(
                     windowSizeClass = calculateWindowSizeClass(this),
                     startDestination = detectStartDestination()
                 )
@@ -74,4 +53,4 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun detectStartDestination(
-): String = todoHomeRoute
+): String = homeRoute

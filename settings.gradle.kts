@@ -21,11 +21,11 @@ dependencyResolutionManagement {
 
 buildCache {
     local {
-        directory = "../nexu-prebuilts/m2repository"
+        directory = "../rastin-prebuilts/m2repository"
     }
 }
 
-rootProject.name = "Nexu"
+rootProject.name = "Rastin"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(":app")
@@ -35,7 +35,5 @@ include(":core:designsystem")
 include(":core:common")
 include(":core:model")
 include(":core:data")
-include(":core:domain")
 
-include(":feature:todohome")
-include(":core:database")
+include(":feature:home")

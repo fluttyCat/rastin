@@ -1,4 +1,4 @@
-package com.nexu.android.core.data.common.qualifer
+package com.rastin.android.core.data.common.qualifer
 
 object Qualifiers {
     const val QUALIFIER_APP_VERSION_NAME = "QUALIFIER.APP_VERSION_NAME"

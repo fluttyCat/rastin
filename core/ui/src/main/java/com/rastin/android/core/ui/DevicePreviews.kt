@@ -1,4 +1,4 @@
-package com.nexu.android.core.ui
+package com.rastin.android.core.ui
 
 import androidx.compose.ui.tooling.preview.Preview
 

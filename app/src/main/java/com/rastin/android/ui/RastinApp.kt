@@ -1,5 +1,6 @@
-package com.nexu.android.ui
+package com.rastin.android.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
@@ -22,37 +23,35 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
-import com.nexu.android.core.designsystem.theme.NexuBackground
-import com.nexu.android.navigation.NexuNavHost
+import com.rastin.android.navigation.RastinNavHost
 
 @Composable
-fun NexuApp(
+fun RastinApp(
     windowSizeClass: WindowSizeClass,
-    appState: NexuAppState = rememberNexuAppState(
+    appState: RastinAppState = rememberRastinAppState(
         windowSizeClass = windowSizeClass
     ),
     startDestination: String,
 ) {
-    NexuBackground {
-        NexuAppContent(
-            appState = appState,
-            startDestination = startDestination
-        )
-    }
+
+    RastinAppContent(
+        appState = appState,
+        startDestination = startDestination
+    )
 }
 
 @OptIn(
     ExperimentalComposeUiApi::class,
 )
 @Composable
-private fun NexuAppContent(
-    appState: NexuAppState,
+private fun RastinAppContent(
+    appState: RastinAppState,
     startDestination: String,
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
 
     Scaffold(
-        modifier = Modifier.semantics { testTagsAsResourceId = true },
+        modifier = Modifier.semantics { testTagsAsResourceId = true }.background(Color.White),
         containerColor = Color.Transparent,
         contentColor = MaterialTheme.colorScheme.onBackground,
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
@@ -70,7 +69,7 @@ private fun NexuAppContent(
                     )
                 )
         ) {
-            NexuNavHost(
+            RastinNavHost(
                 navController = appState.navController,
                 onBackClick = appState::onBackClick,
                 snackbarHostState = snackbarHostState,

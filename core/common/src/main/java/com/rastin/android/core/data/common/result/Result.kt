@@ -1,8 +1,8 @@
-package com.nexu.android.core.data.common.result
+package com.rastin.android.core.data.common.result
 
 import android.database.sqlite.SQLiteConstraintException
-import com.nexu.android.core.data.common.result.Result.Loading
-import com.nexu.android.core.data.common.result.Result.Success
+import com.rastin.android.core.data.common.result.Result.Loading
+import com.rastin.android.core.data.common.result.Result.Success
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map

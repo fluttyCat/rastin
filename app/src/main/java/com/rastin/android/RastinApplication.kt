@@ -1,29 +1,10 @@
-package com.nexu.android
+package com.rastin.android
 
 import android.app.Application
-import coil.ImageLoader
-import coil.ImageLoaderFactory
-import coil.decode.SvgDecoder
-import coil.request.CachePolicy
 import dagger.hilt.android.HiltAndroidApp
 
 /**
- * [Application] class for Nexu
+ * [Application] class for Rastin
  */
 @HiltAndroidApp
-class NexuApplication : Application(), ImageLoaderFactory {
-
-    override fun newImageLoader(): ImageLoader {
-        return ImageLoader.Builder(this)
-            .components {
-                add(SvgDecoder.Factory())
-            }
-            .diskCachePolicy(CachePolicy.ENABLED)
-            .memoryCachePolicy(CachePolicy.ENABLED)
-            .networkCachePolicy(CachePolicy.ENABLED)
-            .respectCacheHeaders(false)
-            .placeholder(R.mipmap.app_icon_round)
-            .error(R.mipmap.app_icon_round)
-            .build()
-    }
-}
+class RastinApplication : Application()

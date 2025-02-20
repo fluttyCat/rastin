@@ -14,8 +14,8 @@
 .externalNativeBuild
 .cxx
 local.properties
-/nexu/build
-/nexu/build
+/rastin/build
+/rastin/build
 
 
 # built application files

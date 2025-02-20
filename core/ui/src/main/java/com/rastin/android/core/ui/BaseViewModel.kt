@@ -1,4 +1,4 @@
-package com.nexu.android.core.ui
+package com.rastin.android.core.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

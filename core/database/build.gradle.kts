@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.nexu.core.database"
+    namespace = "com.rastin.core.database"
     compileSdk = 34
 
     defaultConfig {

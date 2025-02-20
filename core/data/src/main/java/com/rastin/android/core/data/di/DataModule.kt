@@ -1,7 +1,7 @@
-package com.nexu.android.core.data.di
+package com.rastin.android.core.data.di
 
-import com.nexu.android.core.data.repository.offline.NexuOfflineRepository
-import com.nexu.android.core.data.repository.offline.NexuOfflineRepositoryImpl
+import com.rastin.android.core.data.repository.Repository
+import com.rastin.android.core.data.repository.RepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -12,8 +12,8 @@ import dagger.hilt.components.SingletonComponent
 interface DataModule {
 
     @Binds
-    fun bindsNexuOfflineRepository(
-        repository: NexuOfflineRepositoryImpl
-    ): NexuOfflineRepository
+    fun bindsRepository(
+        repository: RepositoryImpl
+    ): Repository
 
 }

@@ -14,7 +14,7 @@
  *   limitations under the License.
  */
 
-package com.nexu.android
+package com.rastin.android
 
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalog

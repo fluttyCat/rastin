@@ -1,13 +1,13 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("nexu.android.library")
+    id("rastin.android.library")
     id("kotlin-parcelize")
     id("kotlinx-serialization")
     kotlin("kapt")
 }
 
 android {
-    namespace = "com.nexu.android.core.model"
+    namespace = "com.rastin.android.core.model"
 }
 
 dependencies {

@@ -1,4 +1,4 @@
-package com.nexu.android.core.designsystem.theme
+package com.rastin.android.core.designsystem.theme
 
 import android.os.Build
 import androidx.annotation.ChecksSdkIntAtLeast
@@ -101,7 +101,7 @@ val DarkAndroidBackgroundTheme = BackgroundTheme(color = surfaceDark)
 
 
 /**
- * Nexu theme.
+ * theme.
  *
  * The order of precedence for the color scheme is: Dynamic color > Android theme > Default theme.
  * Dark theme is independent as all the aforementioned color schemes have light and dark versions.
@@ -112,7 +112,7 @@ val DarkAndroidBackgroundTheme = BackgroundTheme(color = surfaceDark)
  * @param androidTheme Whether the theme should use the Android theme color scheme.
  */
 @Composable
-fun NexuTheme(
+fun Theme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     androidTheme: Boolean = false,
     disableDynamicTheming: Boolean = true,
@@ -152,7 +152,7 @@ fun NexuTheme(
     ) {
         MaterialTheme(
             colorScheme = colorScheme,
-            typography = NexuTypography,
+            typography = rastinTypography,
             content = content
         )
     }

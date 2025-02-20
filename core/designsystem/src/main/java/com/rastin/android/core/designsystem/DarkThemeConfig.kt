@@ -1,11 +1,11 @@
-package com.nexu.android.core.designsystem
+package com.rastin.android.core.designsystem
 
 import androidx.annotation.StringRes
 import androidx.compose.material3.ColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.luminance
 import com.rastin.android.core.designsystem.R
-import com.nexu.android.core.data.model.DarkThemeConfig as DarkModel
+import com.rastin.android.core.data.model.DarkThemeConfig as DarkModel
 
 enum class DarkThemeConfig(@StringRes val title: Int) {
     FOLLOW_SYSTEM(R.string.system_default),
@@ -21,11 +21,11 @@ fun DarkThemeConfig.asModel(): DarkModel {
     }
 }
 
-fun com.nexu.android.core.data.model.DarkThemeConfig.asDesignModel(): DarkThemeConfig {
+fun com.rastin.android.core.data.model.DarkThemeConfig.asDesignModel(): DarkThemeConfig {
     return when (this) {
-        com.nexu.android.core.data.model.DarkThemeConfig.FOLLOW_SYSTEM -> DarkThemeConfig.FOLLOW_SYSTEM
-        com.nexu.android.core.data.model.DarkThemeConfig.LIGHT -> DarkThemeConfig.LIGHT
-        com.nexu.android.core.data.model.DarkThemeConfig.DARK -> DarkThemeConfig.DARK
+        com.rastin.android.core.data.model.DarkThemeConfig.FOLLOW_SYSTEM -> DarkThemeConfig.FOLLOW_SYSTEM
+        com.rastin.android.core.data.model.DarkThemeConfig.LIGHT -> DarkThemeConfig.LIGHT
+        com.rastin.android.core.data.model.DarkThemeConfig.DARK -> DarkThemeConfig.DARK
     }
 }
 

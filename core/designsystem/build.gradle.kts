@@ -1,6 +1,6 @@
 plugins {
-    id("nexu.android.library")
-    id("nexu.android.library.compose")
+    id("rastin.android.library")
+    id("rastin.android.library.compose")
 }
 
 android {
@@ -10,7 +10,7 @@ android {
     lint {
         checkDependencies = true
     }
-    namespace = "com.nexu.android.core.designsystem"
+    namespace = "com.rastin.android.core.designsystem"
 }
 
 dependencies {

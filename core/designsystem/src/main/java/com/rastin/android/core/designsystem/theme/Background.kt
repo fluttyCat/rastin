@@ -1,4 +1,4 @@
-package com.nexu.android.core.designsystem.theme
+package com.rastin.android.core.designsystem.theme
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -6,7 +6,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 
 /**
- * A class to model background color and tonal elevation values for Nexu.
+ * A class to model background color and tonal elevation values for Rastin.
  */
 @Immutable
 data class BackgroundTheme(

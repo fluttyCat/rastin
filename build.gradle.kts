@@ -5,7 +5,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        maven { url = uri("../nexu-prebuilts/m2repository") }
+        maven { url = uri("../rastin-prebuilts/m2repository") }
     }
     dependencies {
         //classpath(libs.googleServices.gradlePlugin)
